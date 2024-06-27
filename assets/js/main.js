@@ -226,4 +226,69 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('id');
+
+    const projects = {
+      'loan-system': {
+        category: 'Financial Services / FinTech',
+        date: 'Present',
+        url: 'https://github.com/evelinkolev/loansystem',
+        title: 'Loan debt card repayment system',
+        description: `
+          This project utilises several key technologies and patterns to build a robust loan debt card repayment system in ASP.NET Core Web API. The Repository pattern abstracts data access logic for cleaner code maintenance. CQRS (Command Query Responsibility Segregation) with the Mediator pattern is implemented using MediatR to handle commands and queries, ensuring a clear separation between read and write operations. JWT (JSON Web Tokens) are used for securing API endpoints, while HMAC (Hash-based Message Authentication Code) ensures secure password hashing and data integrity. Entity Framework Core with code-first migrations manages the database schema, and Dependency Injection (DI) facilitates the management of service lifetimes and dependencies. Additionally, a custom StringGenerator class provides functionalities for generating and validating card numbers and security codes, demonstrating secure and random data generation practices.
+        `,
+        images: [
+          'assets/img/portfolio/accd027f-a93b-42c2-a0c5-804b0874c6e8-loan-system-project-back-end.png',
+          'assets/img/portfolio/accd027f-a93b-42c2-a0c5-804b0874c6e8-loan-system-project-sql.png'
+        ]
+      },
+      'steam-games': {
+        category: 'Web Scraping and Data Extraction',
+        date: 'Present',
+        url: 'https://github.com/evelinkolev/steam_web_scraper',
+        title: 'Steam store\'s most played games chart',
+        description: `
+          This project involves a web scraping and data extraction script using Selenium in Python. The script automates the process of extracting data from the Steam store's most played games chart. It retrieves information such as game names, prices, current players, and peak players today. The extracted data is processed and structured into a pandas DataFrame and then saved to a CSV file for further analysis. This automation leverages headless Chrome browser capabilities for efficient and non-intrusive data scraping.
+        `,
+        images: [
+          'assets/img/portfolio/98a62882-a316-4daf-8677-8c2134cd5d9c-steam_most_played_games.png',
+          'assets/img/portfolio/98a62882-a316-4daf-8677-8c2134cd5d9c-steam_most_played_games_web_scraper.png'
+        ]
+      },
+      'cybersecurity-attacks': {
+        category: 'Data Science',
+        date: 'Present',
+        url: 'https://www.kaggle.com/code/archwaq/cyber-security-attacks-eda',
+        title: 'Cyber Security Attacks EDA',
+        description: `
+          I developed a Cyber Attack Analysis project focused on identifying vulnerable traffic types and devices/OS based on sample data. Using Python with Pandas and Seaborn, I analysed 'Anomaly Scores' and 'Action Taken' to pinpoint infiltrated traffic and cyber attacks. This project taught me data filtering, aggregation, and visualisation techniques essential for cybersecurity analytics.
+        `,
+        images: [
+          'assets/img/portfolio/547db4b7-56bd-4d0a-9b84-075e4acabda8-cybersecurity-attacks-eda.png'
+        ]
+      }
+      // Add more projects as needed
+    };
+
+    const project = projects[projectId];
+    if (project) {
+      document.querySelector('.portfolio-info ul').innerHTML = `
+        <li><strong>Category</strong>: ${project.category}</li>
+        <li><strong>Project date</strong>: ${project.date}</li>
+        <li><strong>Project URL</strong>: <a href="${project.url}">${project.url}</a></li>
+      `;
+      document.querySelector('.portfolio-description').innerHTML = `
+        <h2>${project.title}</h2>
+        <p>${project.description}</p>
+      `;
+      document.querySelector('.swiper-wrapper').innerHTML = project.images.map(img => `
+        <div class="swiper-slide">
+          <img src="${img}" alt="">
+        </div>
+      `).join('');
+    }
+  });
+
 })();
